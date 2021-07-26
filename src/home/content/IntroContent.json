@@ -1,0 +1,15 @@
+{
+  "title": "Landing page template for developers & startups",
+  "text": "Beautifully designed templates using React.js, mui and styled-components! Save weeks of time and build your landing page in minutes.",
+  "button": [
+    {
+      "title": "Login",
+      "path": "/login"
+    },
+    {
+      "title": "Sign up",
+      "color": "#fff",
+      "path": "/signup"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+- name: Provision prerequisites
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Install python
+      raw: test -e /usr/bin/python3 || (apt-get -y update && apt-get install -y python3)
+
+- name: Provision Image
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Remove apt lock file
+      file:
+        state: absent
+        path: "/var/lib/dpkg/lock"
+
+    - name: Install nginx
+      apt:
+        name: ['nginx']
+        state: latest
+
+    - name: Remove nginx available default
+      file:
+        path: /etc/nginx/sites-available/default
+        state: absent
+
+    - name: Remove nginx enabled default
+      file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+
+    - name: Copy nginx configuration
+      copy:
+        src: ../nginx/nginx.conf
+        dest: /etc/nginx/conf.d/default.conf
+        owner: root
+        group: root
+        mode: '0644'
+      notify:
+        - Reload nginx
+
+    - name: Copy app build
+      copy:
+        src: ../../build/
+        dest: /var/www/html
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Check ufw status
+      shell: ufw status
+      ignore_errors: True
+      register: ufw_check
+
+    - name: Open ports 80, 443
+      shell: ufw allow 'Nginx Full'
+      when: "'not found' not in ufw_check.stderr"
+
+  handlers:
+    - name: Reload nginx
+      service:
+        name: nginx
+        state: reloaded
