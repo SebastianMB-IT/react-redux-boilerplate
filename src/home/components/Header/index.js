@@ -3,6 +3,8 @@ import { withTranslation } from 'react-i18next'
 import { SvgIcon } from '../../common/SvgIcon'
 import { Button } from '../../common/Button'
 import { Box, Drawer, Container } from '@mui/material'
+import { goTo } from '../../common/utils/goTo'
+import { useHistory } from 'react-router-dom'
 import {
   HeaderSection,
   LogoContainer,
@@ -20,6 +22,7 @@ import {
 
 const Header = ({ t }) => {
   const [visible, setVisibility] = useState(false)
+  const history = useHistory()
 
   const showDrawer = () => {
     setVisibility(!visible)
@@ -50,10 +53,12 @@ const Header = ({ t }) => {
         </CustomNavLinkSmall>
         <CustomNavLinkSmall
           style={{ width: '180px' }}
-          onClick={() => scrollTo('contact')}
+          onClick={() => goTo('', '/signup', history)}
         >
           <Span>
-            <Button>{t('Let\'s Chat')}</Button>
+            <Button>
+              {t('Sign up')}
+            </Button>
           </Span>
         </CustomNavLinkSmall>
       </>

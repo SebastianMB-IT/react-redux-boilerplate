@@ -5,6 +5,7 @@ import { Button } from '../../../common/Button'
 import { Fade } from 'react-awesome-reveal'
 import { Grid } from '@mui/material'
 import { useHistory } from 'react-router-dom'
+import { goTo } from '../../../common/utils/goTo'
 import {
   RightBlockContainer,
   Content,
@@ -14,16 +15,6 @@ import {
 
 const RightBlock = ({ title, content, button, icon, t, id }) => {
   const history = useHistory()
-  const goTo = (id, path) => {
-    if (path) {
-      history.push(path)
-    } else {
-      const element = document.getElementById(id)
-      element.scrollIntoView({
-        behavior: 'smooth'
-      })
-    }
-  }
   return (
     <RightBlockContainer>
       <Fade direction='right'>
@@ -47,7 +38,7 @@ const RightBlock = ({ title, content, button, icon, t, id }) => {
                         key={id}
                         color={item.color}
                         fixedWidth={true}
-                        onClick={() => goTo('about', item.path)}
+                        onClick={() => goTo('about', item.path, history)}
                       >
                         {t(item.title)}
                       </Button>

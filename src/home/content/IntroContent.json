@@ -3,13 +3,13 @@
   "text": "Beautifully designed templates using React.js, mui and styled-components! Save weeks of time and build your landing page in minutes.",
   "button": [
     {
-      "title": "Login",
-      "path": "/login"
+      "title": "Sign up",
+      "path": "/signup"
     },
     {
-      "title": "Sign up",
+      "title": "Login",
       "color": "#fff",
-      "path": "/signup"
+      "path": "/login"
     }
   ]
 }
