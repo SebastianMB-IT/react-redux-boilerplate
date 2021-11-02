@@ -22,7 +22,7 @@ export default function SideBar (props) {
       <Toolbar />
       <Divider />
       <List>
-        {['Dashboard', 'Report', 'Settings'].map((text, index) => (
+        {['Dashboard'].map((text, index) => (
           <ListItem button key={text}>
             <ListItemText primary={text} />
           </ListItem>
