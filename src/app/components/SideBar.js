@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import Drawer from '@mui/material/Drawer'
 import Box from '@mui/material/Box'
-import Toolbar from '@mui/material/Toolbar'
-import Divider from '@mui/material/Divider'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
+import Logo from '../common/Logo'
 
 export default function SideBar (props) {
   const drawerWidth = 240
@@ -19,8 +18,18 @@ export default function SideBar (props) {
 
   const drawer = (
     <div>
-      <Toolbar />
-      <Divider />
+      <Logo />
+      <Box sx={{
+        padding: '1rem'
+      }}>
+        <Box sx={{
+          background: 'hsl(210deg 22% 96%)',
+          padding: '1rem',
+          borderRadius: '8px'
+        }}>
+          User
+        </Box>
+      </Box>
       <List>
         {['Dashboard'].map((text, index) => (
           <ListItem button key={text}>
@@ -37,7 +46,6 @@ export default function SideBar (props) {
       sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
       aria-label="mailbox folders"
     >
-      {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
       <Drawer
         container={container}
         variant="temporary"
